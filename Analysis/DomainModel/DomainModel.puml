@@ -1,0 +1,131 @@
+@startuml DomainModel
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 200
+skinparam ranksep 80
+
+' ---------- CLASSES ----------
+
+abstract class User {
+  userID : String
+  username : String
+  email : String
+  createdDate : DateTime
+}
+
+class Developer {
+  pullRequestsSubmitted : Integer
+}
+
+class RepositoryAdmin {
+  repositoriesManaged : Integer
+}
+
+class Repository {
+  repositoryID : String
+  name : String
+  githubUrl : String
+  webhookUrl : String
+  isActive : Boolean
+}
+
+class PullRequest {
+  pullRequestID : String
+  number : Integer
+  title : String
+  description : String
+  status : String
+  createdDate : DateTime
+  updatedDate : DateTime
+}
+
+class FileChange {
+  fileChangeID : String
+  filename : String
+  filepath : String
+  additions : Integer
+  deletions : Integer
+  changeType : String
+}
+
+abstract class Issue {
+  issueID : String
+  lineNumber : Integer
+  severity : String
+  message : String
+  detectedDate : DateTime
+}
+
+class StyleIssue {
+  violatedRule : String
+}
+
+class ComplexityIssue {
+  complexityScore : Float
+}
+
+class SecurityIssue {
+  vulnerabilityPattern : String
+}
+
+class BugIssue {
+  bugCategory : String
+}
+
+class ReviewComment {
+  commentID : String
+  body : String
+  filePath : String
+  lineNumber : Integer
+  createdDate : DateTime
+}
+
+class CodeReviewRule {
+  ruleID : String
+  name : String
+  severity : String
+  isEnabled : Boolean
+}
+
+class QualityMetrics {
+  metricsID : String
+  timestamp : DateTime
+  totalIssuesCount : Integer
+  codeQualityScore : Float
+}
+
+' ---------- INHERITANCE ----------
+
+User <|-- Developer
+User <|-- RepositoryAdmin
+
+Issue <|-- StyleIssue
+Issue <|-- ComplexityIssue
+Issue <|-- SecurityIssue
+Issue <|-- BugIssue
+
+
+' ---------- ASSOCIATIONS ----------
+
+Developer "1" -- "0..*" PullRequest : submits
+
+RepositoryAdmin "1" -- "0..*" Repository : manages
+
+Repository "1" -- "0..*" PullRequest : contains
+
+RepositoryAdmin "1" -- "0..*" CodeReviewRule : configures
+
+Repository "1" -- "0..*" CodeReviewRule : defines
+
+PullRequest "1" -- "1..*" FileChange : includes
+
+FileChange "1" -- "0..*" Issue : produces
+
+PullRequest "1" -- "0..*" ReviewComment : receives
+
+Issue "0..1" -- "0..*" ReviewComment : discussedIn
+
+PullRequest "1" -- "1" QualityMetrics : has
+
+@enduml

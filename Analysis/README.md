@@ -1,1 +1,1 @@
-This folder consists of the robustness diagrams for the 6 use cases of this project.
+This folder consists of the UML diagrams for the 6 use cases of this project.

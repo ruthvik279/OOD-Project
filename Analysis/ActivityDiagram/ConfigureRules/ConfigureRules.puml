@@ -1,0 +1,54 @@
+@startuml
+title UC5 - Configure Rules
+
+start
+
+:1. Admin accesses Configure Rules page;
+:2. System fetches all available rules;
+:3. System displays current rule settings;
+
+:4. Admin selects rules to enable/disable;
+:5. Admin sets severity levels;
+:6. Admin configures rule thresholds;
+:7. Admin sets quality gates;
+
+:8. System validates rule configuration;
+
+if (9. Configuration valid?) then (Yes)
+  :10. Admin reviews rule summary;
+else (No)
+  :11. Display validation errors;
+endif
+
+if (12. Admin approves?) then (Yes)
+  :13. Save rule configuration;
+  :14. Update active rule set;
+  :15. Display success message;
+else (No)
+  :16. Admin modifies rules;
+endif
+
+stop
+
+note right
+Activity Description:
+
+1. Admin accesses the Configure Rules page.
+2. System fetches all available rule templates.
+3. System displays current rule settings and status.
+4. Admin selects which rules to enable or disable.
+5. Admin sets severity levels for each rule.
+6. Admin configures rule-specific thresholds.
+7. Admin sets quality gates for PR approval.
+8. System validates the entire configuration.
+9. System checks if configuration is valid.
+10. If invalid - displays validation errors.
+11. If valid - admin reviews the rule summary.
+12. Admin confirms approval of the configuration.
+13. System saves rule configuration to database.
+14. System updates the active rule set.
+15. System displays success confirmation message.
+16. If not approved - admin can modify rules.
+end note
+
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+title UC1 - Submit Pull Request
+
+start
+
+:1. Developer creates Pull Request on GitHub;
+:2. GitHub sends webhook notification;
+:3. System receives and validates webhook;
+
+if (4. Webhook valid?) then (Yes)
+  :5. Fetch PR file changes;
+else (No)
+  :6. Reject event;
+  stop
+endif
+
+:7. Run static analysis on code;
+:8. Check for issues and bugs;
+
+if (9. Issues found?) then (Yes)
+  :10. Generate review comments;
+  :11. Post comments to GitHub PR;
+else (No)
+  :12. Post approval message;
+endif
+
+:13. Update quality metrics;
+:14. Send notification to developer;
+
+stop
+
+note right
+Activity Description:
+
+1. Developer creates a Pull Request on GitHub.
+2. GitHub sends webhook notification to the system.
+3. System receives and validates the webhook.
+4. System checks if webhook signature is valid.
+5. If invalid, system rejects the event.
+6. System fetches all file changes from the PR.
+7. System runs static analysis using enabled rules.
+8. System checks for code issues and bugs.
+9. System evaluates if any issues were found.
+10. If found - generates detailed review comments.
+11. If found - posts comments to GitHub PR.
+12. If no issues - posts approval message.
+13. System updates quality metrics in database.
+14. System sends notification to developer.
+end note
+
+@enduml

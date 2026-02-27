@@ -1,0 +1,53 @@
+@startuml
+title UC4 - Connect Repository
+
+start
+
+:1. Admin clicks "Connect Repository";
+:2. Admin enters GitHub URL and token;
+:3. System validates input fields;
+
+if (4. Input valid?) then (Yes)
+  :5. Authenticate with GitHub API;
+else (No)
+  :6. Display validation error;
+  stop
+endif
+
+if (7. Authentication successful?) then (Yes)
+  :8. Create webhook on GitHub;
+else (No)
+  :9. Display authentication error;
+  stop
+endif
+
+if (10. Webhook created?) then (Yes)
+  :11. Save repository configuration;
+  :12. Enable automated scanning;
+  :13. Display success message;
+else (No)
+  :14. Display webhook error;
+endif
+
+stop
+
+note right
+Activity Description:
+
+1. Admin clicks "Connect Repository" button.
+2. Admin enters GitHub repository URL and access token.
+3. System validates that all input fields are filled.
+4. System checks if input format is valid.
+5. If invalid - displays validation error.
+6. System authenticates with GitHub API.
+7. System checks if authentication was successful.
+8. If failed - displays authentication error.
+9. System creates webhook on GitHub repository.
+10. System checks if webhook was created successfully.
+11. If failed - displays webhook error.
+12. System saves repository configuration to database.
+13. System enables automated code scanning.
+14. System displays success confirmation message.
+end note
+
+@enduml

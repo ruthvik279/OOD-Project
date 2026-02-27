@@ -1,0 +1,49 @@
+@startuml
+title UC2 - View Review Comments
+
+start
+
+:1. Developer opens Pull Request page;
+:2. System fetches review comments;
+:3. System loads all feedback from analyzers;
+
+if (4. Comments exist?) then (Yes)
+  :5. Organize comments by severity;
+else (No)
+  :6. Display "No issues found";
+  stop
+endif
+
+:7. Display all comments with details;
+:8. Show code context and suggestions;
+
+if (9. Developer wants to filter?) then (Yes)
+  :10. Apply selected filter criteria;
+  :11. Re-display filtered comments;
+else (No)
+endif
+
+:12. Developer reviews the feedback;
+:13. Mark comments as viewed;
+
+stop
+
+note right
+Activity Description:
+
+1. Developer opens the Pull Request page.
+2. System fetches all review comments from database.
+3. System loads feedback from all analyzers.
+4. System checks if any comments exist.
+5. If no comments - displays success message and stops.
+6. System organizes comments by severity level.
+7. System displays all comments with details.
+8. System shows code context and improvement suggestions.
+9. System checks if developer wants to filter comments.
+10. If yes - applies selected filter criteria.
+11. If yes - re-displays filtered comments.
+12. Developer reviews the feedback.
+13. System marks comments as viewed.
+end note
+
+@enduml

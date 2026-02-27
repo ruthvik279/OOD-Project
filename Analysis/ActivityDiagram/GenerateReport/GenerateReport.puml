@@ -1,0 +1,52 @@
+@startuml
+title UC6 - Generate Report
+
+start
+
+:1. Admin clicks "Generate Report";
+:2. Admin selects report parameters;
+:3. Inputs: date range, repository, type;
+:4. System fetches analysis data;
+
+if (5. Data available?) then (Yes)
+  :6. Compile PR results and metrics;
+else (No)
+  :7. Display "No data found";
+  stop
+endif
+
+:8. Calculate issue statistics;
+:9. Generate visualizations;
+:10. Create report document;
+
+:11. Display report preview;
+
+if (12. Export format?) then (PDF)
+  :13. Generate and download PDF;
+else if (12. Export format?) then (CSV)
+  :14. Generate and download CSV;
+else (No)
+endif
+
+stop
+
+note right
+Activity Description:
+
+1. Admin clicks "Generate Report" button.
+2. Admin selects report parameters.
+3. Admin input includes date range, repository, and type.
+4. System fetches all analysis data from database.
+5. System checks if data is available.
+6. If no data - displays message and stops.
+7. System compiles PR results and metrics.
+8. System calculates issue statistics by severity.
+9. System generates charts and visualizations.
+10. System creates the complete report document.
+11. System displays report preview to admin.
+12. System evaluates selected export format.
+13. If PDF - generates and downloads PDF file.
+14. If CSV - generates and downloads CSV file.
+end note
+
+@enduml

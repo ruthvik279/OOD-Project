@@ -1,0 +1,51 @@
+@startuml
+title UC3 - View Dashboard
+
+start
+
+:1. User opens the dashboard;
+:2. System fetches quality metrics;
+:3. System gathers historical data;
+:4. System queries all repositories;
+
+if (5. Data available?) then (Yes)
+  :6. Compile metrics and statistics;
+else (No)
+  :7. Display empty state message;
+  stop
+endif
+
+:8. Generate visualizations and charts;
+:9. Render dashboard display;
+
+if (10. User wants to filter?) then (Yes)
+  :11. Apply filter criteria;
+  :12. Update dashboard view;
+else (No)
+endif
+
+:13. Display final dashboard;
+:14. User can export data if needed;
+
+stop
+
+note right
+Activity Description:
+
+1. User opens the dashboard.
+2. System fetches quality metrics from database.
+3. System gathers historical trend data.
+4. System queries all accessible repositories.
+5. System checks if data is available.
+6. If no data - displays empty state and stops.
+7. System compiles all metrics and statistics.
+8. System generates visualizations and charts.
+9. System renders dashboard display to user.
+10. System checks if user wants to apply filters.
+11. If yes - applies selected filter criteria.
+12. If yes - updates dashboard view.
+13. System displays the final dashboard.
+14. User can export data in various formats.
+end note
+
+@enduml
